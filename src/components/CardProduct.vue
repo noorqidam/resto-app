@@ -7,7 +7,7 @@
     />
     <div class="card-body">
       <h5 class="card-title">{{ product.nama }}</h5>
-      <p class="card-text">Harga : Rp. {{ product.harga }}</p>
+      <p class="card-text">Harga : Rp. {{ _formatPrice(product.harga) }}</p>
       <router-link class="btn btn-success" :to="'/foods/' + product.id"
         ><b-icon-cart></b-icon-cart> Pesan</router-link
       >
@@ -19,6 +19,12 @@
 export default {
   name: "CardProduct",
   props: ["product"],
+  methods: {
+    _formatPrice(value) {
+      const val = (value / 1).toFixed(0).replace(".", ",");
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+  },
 };
 </script>
 
