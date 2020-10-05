@@ -39,7 +39,7 @@
           </h4>
           <form class="mt-4" v-on:submit.prevent>
             <div class="form-group">
-              <label for="jumlah_pemesanan"></label>
+              <label for="jumlah_pemesanan">Jumlah Pesanan</label>
               <input
                 type="number"
                 class="form-control"
@@ -101,6 +101,13 @@ export default {
             });
           })
           .catch((err) => console.log(err));
+      } else {
+        this.$toast.error("Jumlah Pesanan Harus diisi", {
+          type: "error",
+          position: "top-right",
+          duration: 3000,
+          dismissible: true,
+        });
       }
     },
   },
