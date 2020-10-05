@@ -28,9 +28,9 @@
             <strong>Saya</strong>
           </h2>
           <div class="table-responsive mt-3">
-            <table class="table">
+            <table class="table table-sm">
               <thead>
-                <tr class="text-center">
+                <tr>
                   <th scope="col">No</th>
                   <th scope="col">Foto</th>
                   <th scope="col">Makanan</th>
@@ -45,7 +45,6 @@
                 <tr
                   v-for="(keranjang, index) in keranjangs"
                   :key="keranjang.id"
-                  class="text-center"
                 >
                   <th>{{ index + 1 }}</th>
                   <td>
@@ -58,12 +57,10 @@
                   <td>
                     <strong>{{ keranjang.products.nama }}</strong>
                   </td>
-                  <td>
+                  <td style="max-width: 250px">
                     {{ keranjang.keterangan ? keranjang.keterangan : "-" }}
                   </td>
-                  <td>
-                    {{ keranjang.jumlah_pemesanan }}
-                  </td>
+                  <td>{{ keranjang.jumlah_pemesanan }}</td>
                   <td align="right">
                     Rp. {{ _formatPrice(keranjang.products.harga) }}
                   </td>
@@ -177,9 +174,10 @@ export default {
             // Hapus Semua Keranjang
             this.keranjangs.map(function(item) {
               return axios
-                .delete("http://localhost:3000/keranjangs" + item.id)
+                .delete("http://localhost:3000/keranjangs/" + item.id)
                 .catch((error) => console.log(error));
             });
+
             this.$router.push({ path: "/pesanan-sukses" });
             this.$toast.success("Sukses Dipesan", {
               type: "success",
